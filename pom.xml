@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>parent.all</artifactId>
+		<groupId>com.madding</groupId>
+		<version>1.0.0</version>
+	</parent>
+	<groupId>com.madding.shared</groupId>
+	<artifactId>java.encrypt</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>tools.encrypt</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<slf4j_version>1.6.6</slf4j_version>
+		<apache_commons_codec>1.6</apache_commons_codec>
+		<apache_commons_lang>2.6</apache_commons_lang>
+		<bouncycastle_version>1.50</bouncycastle_version>
+		<fastjson_version>1.1.28</fastjson_version>
+		<cryptix_version>3.2.0</cryptix_version>
+		<junit_version>4.12</junit_version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j_version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${apache_commons_codec}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${apache_commons_lang}</version>
+		</dependency>
+
+		<!-- ostermiller -->
+		<dependency>
+			<groupId>org.ostermiller</groupId>
+			<artifactId>utils</artifactId>
+			<version>1.07.00</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>${bouncycastle_version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-ext-jdk15on</artifactId>
+			<version>${bouncycastle_version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcpkix-jdk15on</artifactId>
+			<version>${bouncycastle_version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcpg-jdk15on</artifactId>
+			<version>${bouncycastle_version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcmail-jdk15on</artifactId>
+			<version>${bouncycastle_version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bctsp-jdk15on</artifactId>
+			<version>1.46</version>
+		</dependency>
+
+		<!-- fastjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson_version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cryptix</groupId>
+			<artifactId>cryptix</artifactId>
+			<version>${cryptix_version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit_version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
