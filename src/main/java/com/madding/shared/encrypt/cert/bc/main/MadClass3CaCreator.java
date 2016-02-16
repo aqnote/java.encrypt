@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.security.KeyPair;
 import java.security.PrivateKey;
-import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 
 import com.madding.shared.encrypt.cert.bc.constant.MadBCConstant;
@@ -28,14 +27,14 @@ public class MadClass3CaCreator implements MadBCConstant {
 
     protected static void createExistChain() throws Exception {
 
-        Certificate caCert = MadCaCertLoader.getCaCrt();
+        X509Certificate caCert = MadCaCertLoader.getCaCrt();
         PrivateKey caPrivKey = MadCaCertLoader.getCaKeyPair().getPrivate();
 
         KeyPair curKeyPair = MadCaCertLoader.getClass3CaKeyPair();
 
-        Certificate clientCaCert = MadBCCertGenerator.createClass3RootCert(curKeyPair, caPrivKey,
-                                                                           (X509Certificate) caCert);
-        Certificate[] clientCaChain = new Certificate[2];
+        X509Certificate clientCaCert = MadBCCertGenerator.createClass3RootCert(curKeyPair, caPrivKey,
+                                                                               (X509Certificate) caCert);
+        X509Certificate[] clientCaChain = new X509Certificate[2];
         clientCaChain[0] = clientCaCert;
         clientCaChain[1] = caCert;
 
@@ -52,11 +51,11 @@ public class MadClass3CaCreator implements MadBCConstant {
 
         KeyPair keyPair = KeyPairUtil.generateRSAKeyPair(1024);
 
-        Certificate middleCert = MadBCCertGenerator.createClass3RootCert(keyPair, pPrivKey, caCert);
-        Certificate[] chain = new Certificate[2];
+        X509Certificate middleCert = MadBCCertGenerator.createClass3RootCert(keyPair, pPrivKey, caCert);
+        X509Certificate[] chain = new X509Certificate[2];
         chain[0] = middleCert;
         chain[1] = caCert;
-        
+
         FileOutputStream ostream = new FileOutputStream(new File(MAD_CLASS3_CA + KEY_SUFFIX));
         MadPKCSWriter.storeKeyFile(keyPair, ostream, USER_CERT_PASSWD);
 

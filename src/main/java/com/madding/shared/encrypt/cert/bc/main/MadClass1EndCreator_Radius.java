@@ -3,7 +3,7 @@ package com.madding.shared.encrypt.cert.bc.main;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.security.KeyPair;
-import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
 
 import org.bouncycastle.asn1.x500.X500Name;
 
@@ -36,11 +36,11 @@ public class MadClass1EndCreator_Radius implements MadBCConstant {
         KeyPair pKeyPair = MadCaCertLoader.getCaKeyPair(USER_CERT_PASSWD);
         KeyPair keyPair = KeyPairUtil.generateRSAKeyPair(1024);
 
-        Certificate endCert = BCCertGenerator.getIns().createClass1EndCert(subject, keyPair.getPublic(), pKeyPair);
-        Certificate[] chain = new Certificate[2];
+        X509Certificate endCert = BCCertGenerator.getIns().createClass1EndCert(subject, keyPair.getPublic(), pKeyPair);
+        X509Certificate[] chain = new X509Certificate[2];
         chain[0] = endCert;
         chain[1] = MadCaCertLoader.getCaCrt();
-        
+
         FileOutputStream ostream = new FileOutputStream(new File(MAD_CLASS1_END_RADIUS + KEY_SUFFIX));
         MadPKCSWriter.storeKeyFile(keyPair, ostream, USER_CERT_PASSWD);
 

@@ -1,4 +1,5 @@
 package com.madding.shared.encrypt.cert.self.tool;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.AccessController;
@@ -35,7 +36,7 @@ public class X509CertTool {
         return crtFile;
     }
 
-    public static Certificate coverString2Cert(String base64CrtFile) throws CertificateException, IOException {
+    public static X509Certificate coverString2Cert(String base64CrtFile) throws CertificateException, IOException {
 
         byte[] certENcoded = getCertEncoded(base64CrtFile);
         InputStream istream = StreamUtil.bytes2Stream(certENcoded);

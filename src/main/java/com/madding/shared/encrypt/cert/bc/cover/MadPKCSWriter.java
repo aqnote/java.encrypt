@@ -9,7 +9,6 @@ import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
-import java.security.cert.Certificate;
 import java.security.cert.X509CRL;
 import java.security.cert.X509Certificate;
 
@@ -40,16 +39,15 @@ import com.madding.shared.encrypt.cert.bc.util.CertificateUtil;
  */
 public class MadPKCSWriter implements MadBCConstant {
 
-    public static void storePKCS12File(Certificate[] chain, PrivateKey key, char[] pwd, OutputStream ostream)
-                                                                                                             throws Exception {
+    public static void storePKCS12File(X509Certificate[] chain, PrivateKey key, char[] pwd,
+                                       OutputStream ostream) throws Exception {
         if (chain == null || key == null || ostream == null) return;
 
         PKCS12SafeBag[] certSafeBags = new PKCS12SafeBag[chain.length];
         for (int i = chain.length - 1; i > 0; i--) {
-            X509Certificate cert = (X509Certificate) chain[i];
-            PKCS12SafeBagBuilder safeBagBuilder = new JcaPKCS12SafeBagBuilder(cert);
+            PKCS12SafeBagBuilder safeBagBuilder = new JcaPKCS12SafeBagBuilder(chain[i]);
             safeBagBuilder.addBagAttribute(PKCS12SafeBag.friendlyNameAttribute,
-                                           new DERBMPString(CertificateUtil.getSubjectCN(cert)));
+                                           new DERBMPString(CertificateUtil.getSubjectCN(chain[i])));
             certSafeBags[i] = safeBagBuilder.build();
         }
 
@@ -73,7 +71,8 @@ public class MadPKCSWriter implements MadBCConstant {
         OutputEncryptor oCertEncryptor = new JcePKCSPBEOutputEncryptorBuilder(pbeWithSHAAnd40BitRC2_CBC).setProvider(JCE_PROVIDER).build(pwd);
         pfxPduBuilder.addEncryptedData(oCertEncryptor, certSafeBags);
 
-        // PKCS12PfxPdu pfxPdu = pfxPduBuilder.build(new JcePKCS12MacCalculatorBuilder(idSHA1), pwd);
+        // PKCS12PfxPdu pfxPdu = pfxPduBuilder.build(new
+        // JcePKCS12MacCalculatorBuilder(idSHA1), pwd);
         PKCS12PfxPdu pfxPdu = pfxPduBuilder.build(new BcPKCS12MacCalculatorBuilder(), pwd);
 
         ostream.write(pfxPdu.getEncoded(ASN1Encoding.DER));
@@ -87,7 +86,7 @@ public class MadPKCSWriter implements MadBCConstant {
         ostream.close();
     }
 
-    public static void storePKCS7File(Certificate cert, OutputStream ostream) throws Exception {
+    public static void storePKCS7File(X509Certificate cert, OutputStream ostream) throws Exception {
         // storePem(cert, ostream, null);
     }
 
@@ -99,7 +98,7 @@ public class MadPKCSWriter implements MadBCConstant {
         ostream.close();
     }
 
-    public static void storeDERFile(Certificate cert, OutputStream ostream) throws Exception {
+    public static void storeDERFile(X509Certificate cert, OutputStream ostream) throws Exception {
         storePem(cert, ostream, null);
     }
 

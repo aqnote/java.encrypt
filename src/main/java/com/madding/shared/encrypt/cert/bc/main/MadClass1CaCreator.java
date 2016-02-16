@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.security.KeyPair;
 import java.security.KeyStore;
 import java.security.PrivateKey;
-import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.util.Enumeration;
 
@@ -42,8 +41,8 @@ public class MadClass1CaCreator implements MadBCConstant {
         PrivateKey caPrivKey = MadCaCertLoader.getCaKeyPair().getPrivate();
 
         KeyPair pKeyPair = MadCaCertLoader.getClass1CaKeyPair();
-        Certificate serverCaCert = MadBCCertGenerator.createClass1CaCert(pKeyPair, caPrivKey, caCert);
-        Certificate[] serverCaChain = new Certificate[2];
+        X509Certificate serverCaCert = MadBCCertGenerator.createClass1CaCert(pKeyPair, caPrivKey, caCert);
+        X509Certificate[] serverCaChain = new X509Certificate[2];
         serverCaChain[0] = serverCaCert;
         serverCaChain[1] = caCert;
 
@@ -60,11 +59,11 @@ public class MadClass1CaCreator implements MadBCConstant {
 
         KeyPair keyPair = KeyPairUtil.generateRSAKeyPair(1024);
 
-        Certificate middleCert = MadBCCertGenerator.createClass1CaCert(keyPair, pPrivKey, caCert);
-        Certificate[] chain = new Certificate[2];
+        X509Certificate middleCert = MadBCCertGenerator.createClass1CaCert(keyPair, pPrivKey, caCert);
+        X509Certificate[] chain = new X509Certificate[2];
         chain[0] = middleCert;
         chain[1] = caCert;
-        
+
         FileOutputStream ostream = new FileOutputStream(new File(MAD_CLASS1_CA + KEY_SUFFIX));
         MadPKCSWriter.storeKeyFile(keyPair, ostream, USER_CERT_PASSWD);
 
@@ -74,7 +73,7 @@ public class MadClass1CaCreator implements MadBCConstant {
         ostream = new FileOutputStream(new File(MAD_CLASS1_CA + P12_SUFFIX));
         MadPKCSWriter.storePKCS12File(chain, pPrivKey, USER_CERT_PASSWD, ostream);
         ostream.close();
-        
+
         System.out.println("mad server ca created end....");
     }
 

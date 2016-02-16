@@ -3,7 +3,7 @@ package com.madding.shared.encrypt.cert.bc.main;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.security.KeyPair;
-import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
 
 import com.madding.shared.encrypt.cert.bc.constant.MadBCConstant;
 import com.madding.shared.encrypt.cert.bc.cover.MadPKCSWriter;
@@ -27,8 +27,8 @@ public class MadRootCaCreator implements MadBCConstant {
     protected static void createExistRootChain() throws Exception {
 
         KeyPair intKeyPair = MadCaCertLoader.getCaKeyPair();
-        Certificate clientCaCert = MadBCCertGenerator.createRootCaCert(intKeyPair);
-        Certificate[] clientCaChain = new Certificate[1];
+        X509Certificate clientCaCert = MadBCCertGenerator.createRootCaCert(intKeyPair);
+        X509Certificate[] clientCaChain = new X509Certificate[1];
         clientCaChain[0] = clientCaCert;
 
         FileOutputStream oStream = new FileOutputStream(new File(MAD_ROOT_CA));
@@ -40,8 +40,8 @@ public class MadRootCaCreator implements MadBCConstant {
     protected static void createNewRootChain() throws Exception {
 
         KeyPair keyPair = KeyPairUtil.generateRSAKeyPair(1024);
-        Certificate clientCaCert = MadBCCertGenerator.createRootCaCert(keyPair);
-        Certificate[] clientCaChain = new Certificate[1];
+        X509Certificate clientCaCert = MadBCCertGenerator.createRootCaCert(keyPair);
+        X509Certificate[] clientCaChain = new X509Certificate[1];
         clientCaChain[0] = clientCaCert;
 
         FileOutputStream ostream = new FileOutputStream(new File(MAD_ROOT_CA + KEY_SUFFIX));
