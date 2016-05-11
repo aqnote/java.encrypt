@@ -4,15 +4,15 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>parent.all</artifactId>
 		<groupId>com.aqnote</groupId>
+		<artifactId>parent.all</artifactId>
 		<version>1.0.0</version>
 	</parent>
 	<groupId>com.aqnote.shared</groupId>
 	<artifactId>java.encrypt</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>tools.encrypt</name>
-	<url>http://maven.apache.org</url>
+	<name>AQNote's Project For Encrypt</name>
+	<url>http://www.aqnote.com</url>
 
 	<properties>
 		<slf4j_version>1.6.6</slf4j_version>
