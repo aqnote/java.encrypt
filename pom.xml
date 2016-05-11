@@ -5,10 +5,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>parent.all</artifactId>
-		<groupId>com.madding</groupId>
+		<groupId>com.aqnote</groupId>
 		<version>1.0.0</version>
 	</parent>
-	<groupId>com.madding.shared</groupId>
+	<groupId>com.aqnote.shared</groupId>
 	<artifactId>java.encrypt</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>tools.encrypt</name>
